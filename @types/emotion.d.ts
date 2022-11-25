@@ -22,6 +22,10 @@ interface ThemePalette {
   };
 }
 
+interface ThemeVariables {
+  mainContentWidth: number;
+}
+
 declare module '@emotion/react' {
   export interface ThemeSpacing {
     (arg1: number): string | number;
@@ -34,10 +38,12 @@ declare module '@emotion/react' {
   export interface ThemeOptions {
     palette: ThemePalette;
     spacing: number;
+    variables: ThemeVariables;
   }
 
   export interface Theme {
     palette: ThemePalette;
     spacing: ThemeSpacing;
+    variables: ThemeVariables;
   }
 }

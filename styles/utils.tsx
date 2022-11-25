@@ -10,9 +10,14 @@ function createSpacingFn(stepSize: number): ThemeSpacing {
   };
 }
 
-export function createTheme({ palette, spacing }: ThemeOptions): Theme {
+export function createTheme({
+  palette,
+  spacing,
+  variables,
+}: ThemeOptions): Theme {
   return {
     palette,
+    variables,
     spacing: createSpacingFn(spacing),
   };
 }

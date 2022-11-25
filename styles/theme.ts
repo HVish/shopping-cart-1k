@@ -2,6 +2,9 @@ import { createTheme } from './utils';
 
 const theme = createTheme({
   spacing: 4,
+  variables: {
+    mainContentWidth: 1196,
+  },
   palette: {
     primary: {
       light: '#42a5f5',
