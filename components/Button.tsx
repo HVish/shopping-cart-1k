@@ -8,11 +8,14 @@ export const buttonClasses = prefixedClassNames('Button', [
   'root',
   'outlined',
   'filled',
+  'disabled',
 ]);
 
 interface Props {
   classes?: typeof buttonClasses;
   children: ReactNode;
+  /** @default false */
+  disabled?: boolean;
   /**
    * @default 'filled'
    */
@@ -29,7 +32,7 @@ const Root = styled('button')(({ theme }) => ({
   fontWeight: 'bold',
   fontSize: '16px',
 
-  '&:disabled': {
+  [`&.${buttonClasses.disabled}`]: {
     cursor: 'default',
     opacity: 0.5,
   },
@@ -38,7 +41,7 @@ const Root = styled('button')(({ theme }) => ({
     border: `1px solid ${theme.palette.grey.main}`,
     color: theme.palette.typography.primary,
 
-    '&:hover': {
+    [`&:not(.${buttonClasses.disabled}):hover`]: {
       backgroundColor: theme.palette.grey.light,
     },
   },
@@ -48,15 +51,24 @@ const Root = styled('button')(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
 
-    '&:hover': {
+    [`&:not(.${buttonClasses.disabled}):hover`]: {
       backgroundColor: theme.palette.primary.dark,
     },
   },
 }));
 
-const Button = ({ classes, children, variant = 'filled' }: Props) => {
+const Button = ({
+  classes,
+  children,
+  disabled = false,
+  variant = 'filled',
+}: Props) => {
   return (
-    <Root className={clsx(classes?.root, buttonClasses[variant])}>
+    <Root
+      className={clsx(classes?.root, buttonClasses[variant], {
+        [buttonClasses.disabled]: disabled,
+      })}
+    >
       {children}
     </Root>
   );

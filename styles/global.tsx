@@ -12,6 +12,12 @@ const GlobalStyles = () => (
         min-height: 100%;
         font-size: 16px;
       }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+      }
     `}
   />
 );
