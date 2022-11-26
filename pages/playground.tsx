@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import Button from '../components/Button';
 import Radio from '../components/Radio';
+import Stepper from '../components/Stepper';
 
 const Heading = styled('div')(({ theme }) => ({
   fontSize: 20,
@@ -18,6 +19,8 @@ const Row = styled('div')(({ theme }) => ({
 type RadioValue = 'option1' | 'option2' | 'option3';
 
 const Playground = () => {
+  const [activeStep, setActiveStep] = useState(0);
+
   const [radioValue, setRadioValue] = useState<'' | RadioValue>('');
 
   const handleRadioChange = (value: RadioValue) => () => setRadioValue(value);
@@ -56,6 +59,14 @@ const Playground = () => {
             Option 3 - disabled
           </Radio>
         </form>
+      </Row>
+      <Heading>Stepper</Heading>
+      <Row>
+        <Stepper
+          activeStepIndex={activeStep}
+          steps={['Cart', 'Shipping', 'Payment', 'Finish']}
+          onSelect={step => setActiveStep(step)}
+        />
       </Row>
     </>
   );
