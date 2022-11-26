@@ -4,6 +4,7 @@ const theme = createTheme({
   spacing: 4,
   variables: {
     navHeight: 90,
+    footerHeight: 145,
     mainContentWidth: 1196,
   },
   palette: {

@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import CartIcon from '../icons/CartIcon';
 import { prefixedClassNames } from '../styles/utils';
 import Badge from './Badge';
+import Logo from './Logo';
 import NavLink from './NavLink';
 import UserCell from './UserCell';
 
@@ -26,13 +27,6 @@ const Nav = styled('nav')(({ theme }) => ({
   maxWidth: theme.variables.mainContentWidth,
 }));
 
-const Logo = styled('div')(({ theme }) => ({
-  fontSize: 24,
-  fontWeight: 'bold',
-  letterSpacing: 3,
-  color: theme.palette.primary.light,
-}));
-
 const RightContent = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
@@ -48,7 +42,7 @@ const Navbar = ({ classes, className }: Props) => {
   return (
     <Root className={clsx(className, classes?.root)}>
       <Nav className={classes?.navbar}>
-        <Logo>SHOP</Logo>
+        <Logo />
         <div>
           <NavLink href="/about">About Us</NavLink>
           <NavLink href="/catalog">Catalog</NavLink>

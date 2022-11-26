@@ -12,6 +12,7 @@ export const buttonClasses = prefixedClassNames('Button', [
 ]);
 
 interface Props {
+  className?: string;
   classes?: typeof buttonClasses;
   children: ReactNode;
   /** @default false */
@@ -23,7 +24,7 @@ interface Props {
 }
 
 const Root = styled('button')(({ theme }) => ({
-  display: 'felx',
+  display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: 100,
@@ -58,6 +59,7 @@ const Root = styled('button')(({ theme }) => ({
 }));
 
 const Button = ({
+  className,
   classes,
   children,
   disabled = false,
@@ -65,7 +67,7 @@ const Button = ({
 }: Props) => {
   return (
     <Root
-      className={clsx(classes?.root, buttonClasses[variant], {
+      className={clsx(className, classes?.root, buttonClasses[variant], {
         [buttonClasses.disabled]: disabled,
       })}
     >

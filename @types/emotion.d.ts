@@ -28,6 +28,7 @@ interface ThemePalette {
 
 interface ThemeVariables {
   navHeight: number;
+  footerHeight: number;
   mainContentWidth: number;
 }
 
