@@ -1,13 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-type Data = {
-  name: string;
-};
+import { Product } from '../../shared/types';
+import { products } from './mock-data';
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Product[]>
 ) {
-  res.status(200).json({ name: 'John Doe' });
+  res.status(200).json(products);
 }

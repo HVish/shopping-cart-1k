@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
+import { useSelector } from 'react-redux';
 
 import CartIcon from '../icons/CartIcon';
+import { selectCartItems } from '../store/selectors';
 import { prefixedClassNames } from '../styles/utils';
 import Badge from './Badge';
 import Logo from './Logo';
@@ -39,6 +41,7 @@ interface Props {
 }
 
 const Navbar = ({ classes, className }: Props) => {
+  const cartItems = useSelector(selectCartItems);
   return (
     <Root className={clsx(className, classes?.root)}>
       <Nav className={classes?.navbar}>
@@ -51,7 +54,7 @@ const Navbar = ({ classes, className }: Props) => {
           <NavLink href="/contacts">Contacts</NavLink>
         </div>
         <RightContent>
-          <Badge badgeContent={2}>
+          <Badge badgeContent={cartItems.length}>
             <CartIcon size={32} />
           </Badge>
           <UserCell name="Vishnu Singh" />
