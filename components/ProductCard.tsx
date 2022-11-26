@@ -62,7 +62,7 @@ const ProductCard = ({ className, id, code, image, price, title }: Props) => {
         <Label>Code:</Label> <Code>{code}</Code>
       </div>
       <div>
-        <Label>Price:</Label> <span>{price}</span>
+        <Label>Price:</Label> <span>₹ {price}</span>
       </div>
 
       {isProductAddedToCart ? (
