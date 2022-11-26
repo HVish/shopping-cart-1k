@@ -17,6 +17,7 @@ const Main = styled('main')(({ theme }) => ({
   flex: 1,
   overflow: 'auto',
   padding: theme.spacing(4, 0),
+  paddingTop: theme.variables.navHeight + 16,
 }));
 
 interface Props {

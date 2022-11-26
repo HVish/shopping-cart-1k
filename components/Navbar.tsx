@@ -13,6 +13,11 @@ import UserCell from './UserCell';
 export const navbarClasses = prefixedClassNames('Navbar', ['root', 'navbar']);
 
 const Root = styled('header')(({ theme }) => ({
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  boxShadow: '0px 1px 4px 0px rgb(149 149 149 / 51%)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -54,9 +59,11 @@ const Navbar = ({ classes, className }: Props) => {
           <NavLink href="/contacts">Contacts</NavLink>
         </div>
         <RightContent>
-          <Badge badgeContent={cartItems.length}>
-            <CartIcon size={32} />
-          </Badge>
+          <NavLink href="/cart">
+            <Badge badgeContent={cartItems.length}>
+              <CartIcon size={32} />
+            </Badge>
+          </NavLink>
           <UserCell name="Vishnu Singh" />
         </RightContent>
       </Nav>

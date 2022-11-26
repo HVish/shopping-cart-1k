@@ -6,7 +6,7 @@ import { ReactNode } from 'react';
 
 import { prefixedClassNames } from '../styles/utils';
 
-const navLinkClasses = prefixedClassNames('NavLink', ['root', 'active']);
+export const navLinkClasses = prefixedClassNames('NavLink', ['root', 'active']);
 
 const Link = styled(_Link)(({ theme }) => ({
   display: 'inline-block',

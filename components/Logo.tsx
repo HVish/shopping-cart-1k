@@ -1,10 +1,15 @@
 import styled from '@emotion/styled';
 
-const Root = styled('div')(({ theme }) => ({
+import NavLink, { navLinkClasses } from './NavLink';
+
+const Root = styled(NavLink)(({ theme }) => ({
   fontSize: 24,
   fontWeight: 'bold',
   letterSpacing: 3,
-  color: theme.palette.primary.light,
+
+  [`&.${navLinkClasses.root}`]: {
+    color: theme.palette.primary.light,
+  },
 }));
 
 interface Props {
@@ -12,7 +17,11 @@ interface Props {
 }
 
 const Logo = ({ className }: Props) => {
-  return <Root className={className}>SHOP</Root>;
+  return (
+    <Root className={className} href="/">
+      SHOP
+    </Root>
+  );
 };
 
 export default Logo;
