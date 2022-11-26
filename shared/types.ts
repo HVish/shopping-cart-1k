@@ -13,7 +13,19 @@ export interface CartItem {
   count: number;
 }
 
+export interface ShippingInfo {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  city: string;
+  zipCode: number;
+  address: string;
+  country: string;
+}
+
 export interface CartState {
+  shipping: ShippingInfo | null;
   items: CartItem[];
 }
 

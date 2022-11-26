@@ -9,8 +9,6 @@ import { selectProducts } from '../store/selectors';
 const Root = styled('div')(({ theme }) => ({
   display: 'grid',
   gap: theme.spacing(3),
-  maxWidth: theme.variables.mainContentWidth,
-  margin: 'auto',
   gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
   justifyItems: 'center',
 }));

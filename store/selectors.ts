@@ -9,3 +9,5 @@ export const selectCartItems = (state: RootState) => state.cart.items;
 export const selectIsProductAddedToCart =
   (productId: string) => (state: RootState) =>
     state.cart.items.some(item => item.productId === productId);
+
+export const selectShippingInfo = (state: RootState) => state.cart.shipping;

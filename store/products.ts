@@ -26,21 +26,26 @@ export const productSlice = createSlice({
 
   reducers: {},
 
-  extraReducers: {
-    [HYDRATE]: (state, action: PayloadAction<RootState>) => {
-      return {
-        ...state,
-        ...action.payload.products,
-      };
-    },
-    [fetchProducts.pending.toString()]: state => {
+  extraReducers: builder => {
+    builder.addCase(
+      HYDRATE.toString(),
+      (state, action: PayloadAction<RootState>) => {
+        return {
+          ...state,
+          ...action.payload.products,
+        };
+      }
+    );
+
+    builder.addCase(fetchProducts.pending, state => {
       productsAdapter.setAll(state, []);
-    },
-    [fetchProducts.fulfilled.toString()]: (
-      state,
-      action: PayloadAction<Product[]>
-    ) => {
-      productsAdapter.addMany(state, action.payload);
-    },
+    });
+
+    builder.addCase(
+      fetchProducts.fulfilled,
+      (state, action: PayloadAction<Product[]>) => {
+        productsAdapter.addMany(state, action.payload);
+      }
+    );
   },
 });

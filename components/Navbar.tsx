@@ -17,6 +17,7 @@ const Root = styled('header')(({ theme }) => ({
   top: 0,
   left: 0,
   right: 0,
+  zIndex: 1,
   boxShadow: '0px 1px 4px 0px rgb(149 149 149 / 51%)',
   display: 'flex',
   alignItems: 'center',

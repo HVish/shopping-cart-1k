@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 
-import { CartState, RootState } from '../shared/types';
+import { CartState, RootState, ShippingInfo } from '../shared/types';
 
 const initialState: CartState = {
+  shipping: null,
   items: [],
 };
 
@@ -22,24 +23,37 @@ export const cartSlice = createSlice({
         state.items.push({ productId, count: 1 });
       }
     },
-    removeItem(state, action: PayloadAction<{ productId: string }>) {
-      const { productId } = action.payload;
+    removeItem(
+      state,
+      action: PayloadAction<{
+        productId: string;
+        /** @default 1 */
+        count?: number;
+      }>
+    ) {
+      const { productId, count = 1 } = action.payload;
       const found = state.items.find(i => i.productId === productId);
       if (!found) return;
-      found.count--;
-      if (!found.count) {
+      found.count -= count;
+      if (found.count <= 0) {
         state.items = state.items.filter(item => item.productId !== productId);
       }
     },
+    setShippingInfo(state, action: PayloadAction<ShippingInfo>) {
+      state.shipping = action.payload;
+    },
   },
 
-  extraReducers: {
-    [HYDRATE]: (state, action: PayloadAction<RootState>) => {
-      return {
-        ...state,
-        ...action.payload.cart,
-      };
-    },
+  extraReducers: builder => {
+    builder.addCase(
+      HYDRATE.toString(),
+      (state, action: PayloadAction<RootState>) => {
+        return {
+          ...state,
+          ...action.payload.cart,
+        };
+      }
+    );
   },
 });
 

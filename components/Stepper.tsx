@@ -14,7 +14,6 @@ const Root = styled('div', {
   shouldForwardProp: propName => propName !== 'progress',
 })<{ progress: number }>(({ theme, progress }) => ({
   position: 'relative',
-  width: '100%',
   padding: 20,
 
   '&::before': {
@@ -42,15 +41,14 @@ const Root = styled('div', {
 }));
 
 const Step = styled('div', {
-  shouldForwardProp: propName => !['left', 'isActive'].includes(propName),
-})<{ left: number; isActive: boolean }>(({ theme, left, isActive }) => ({
+  shouldForwardProp: propName => propName !== 'left',
+})<{ left: number }>(({ theme, left }) => ({
   position: 'absolute',
   top: 0,
   left: `${left}%`,
   transform: 'translateX(-50%)',
   cursor: 'pointer',
-  color: !isActive ? theme.palette.text.secondary : undefined,
-  fontWeight: isActive ? 'bold' : undefined,
+  color: theme.palette.text.secondary,
 
   '&::after': {
     content: '""',
@@ -61,10 +59,17 @@ const Step = styled('div', {
     width: 15,
     height: 15,
     borderRadius: '50%',
-    backgroundColor: isActive
-      ? theme.palette.primary.main
-      : theme.palette.grey.dark,
+    backgroundColor: theme.palette.grey.dark,
     transition: 'background-color 100ms ease-in 200ms',
+  },
+
+  [`&.${stepperClasses.itemActive}`]: {
+    fontWeight: 'bold',
+    color: theme.palette.text.primary,
+
+    '&::after': {
+      backgroundColor: theme.palette.primary.main,
+    },
   },
 }));
 
@@ -99,16 +104,24 @@ const Stepper = ({
       className={clsx(className, stepperClasses.root, classes?.root)}
       progress={getLeftOffset(activeStepIndex)}
     >
-      {steps.map((step, index) => (
-        <Step
-          key={index}
-          left={getLeftOffset(index)}
-          isActive={index <= activeStepIndex}
-          onClick={handleSelect(index)}
-        >
-          {step}
-        </Step>
-      ))}
+      {steps.map((step, index) => {
+        const isActive = index <= activeStepIndex;
+        return (
+          <Step
+            key={index}
+            className={clsx(
+              stepperClasses.item,
+              classes?.item,
+              isActive && classes?.itemActive,
+              isActive && stepperClasses.itemActive
+            )}
+            left={getLeftOffset(index)}
+            onClick={handleSelect(index)}
+          >
+            {step}
+          </Step>
+        );
+      })}
     </Root>
   );
 };
