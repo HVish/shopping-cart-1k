@@ -11,9 +11,6 @@ const Root = styled('div')(({ theme }) => ({
   flexWrap: 'wrap',
   overflow: 'auto',
   minHeight: '100vh',
-  padding: theme.spacing(0, 4),
-  maxWidth: theme.variables.mainContentWidth,
-  margin: 'auto',
 }));
 
 const Main = styled('main')(({ theme }) => ({

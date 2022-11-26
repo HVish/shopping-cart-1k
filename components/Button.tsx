@@ -39,7 +39,7 @@ const Root = styled('button')(({ theme }) => ({
 
   [`&.${buttonClasses.outlined}`]: {
     border: `1px solid ${theme.palette.grey.main}`,
-    color: theme.palette.typography.primary,
+    color: theme.palette.text.primary,
 
     [`&:not(.${buttonClasses.disabled}):hover`]: {
       backgroundColor: theme.palette.grey.light,

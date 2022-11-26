@@ -3,12 +3,13 @@ import { createTheme } from './utils';
 const theme = createTheme({
   spacing: 4,
   variables: {
+    navHeight: 90,
     mainContentWidth: 1196,
   },
   palette: {
     primary: {
-      light: '#42a5f5',
-      main: '#1976d2',
+      light: '#02c1f6',
+      main: '#1976d2', // 02C1F6
       dark: '#1565c0',
       contrastText: '#ffffff',
     },
@@ -30,11 +31,15 @@ const theme = createTheme({
       dark: '#929292',
       contrastText: '#ffffff',
     },
+    common: {
+      white: '#ffffff',
+      black: '#000000',
+    },
     background: {
       default: '#f3f3f3',
       paper: '#ffffff',
     },
-    typography: {
+    text: {
       primary: '#1a2027',
       secondary: '#6f7e8c',
     },

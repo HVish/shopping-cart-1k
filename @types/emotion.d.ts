@@ -12,7 +12,11 @@ interface ThemePalette {
   success: PaletteColor;
   error: PaletteColor;
   grey: PaletteColor;
-  typography: {
+  common: {
+    white: string;
+    black: string;
+  }
+  text: {
     primary: string;
     secondary: string;
   };
@@ -23,6 +27,7 @@ interface ThemePalette {
 }
 
 interface ThemeVariables {
+  navHeight: number;
   mainContentWidth: number;
 }
 

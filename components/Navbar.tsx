@@ -1,8 +1,43 @@
+import styled from '@emotion/styled';
 import clsx from 'clsx';
 
+import CartIcon from '../icons/CartIcon';
 import { prefixedClassNames } from '../styles/utils';
+import Badge from './Badge';
+import NavLink from './NavLink';
+import UserCell from './UserCell';
 
 export const navbarClasses = prefixedClassNames('Navbar', ['root', 'navbar']);
+
+const Root = styled('header')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: theme.spacing(0, 4),
+  minHeight: theme.variables.navHeight,
+  backgroundColor: theme.palette.background.paper,
+}));
+
+const Nav = styled('nav')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  width: '100%',
+  maxWidth: theme.variables.mainContentWidth,
+}));
+
+const Logo = styled('div')(({ theme }) => ({
+  fontSize: 24,
+  fontWeight: 'bold',
+  letterSpacing: 3,
+  color: theme.palette.primary.light,
+}));
+
+const RightContent = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: theme.spacing(8),
+}));
 
 interface Props {
   classes?: typeof navbarClasses;
@@ -11,9 +46,24 @@ interface Props {
 
 const Navbar = ({ classes, className }: Props) => {
   return (
-    <header className={clsx(className, classes?.root)}>
-      <nav className={classes?.navbar}>Navbar</nav>
-    </header>
+    <Root className={clsx(className, classes?.root)}>
+      <Nav className={classes?.navbar}>
+        <Logo>SHOP</Logo>
+        <div>
+          <NavLink href="/about">About Us</NavLink>
+          <NavLink href="/catalog">Catalog</NavLink>
+          <NavLink href="/delivery">Delivery</NavLink>
+          <NavLink href="/reviews">Reviews</NavLink>
+          <NavLink href="/contacts">Contacts</NavLink>
+        </div>
+        <RightContent>
+          <Badge badgeContent={2}>
+            <CartIcon size={32} />
+          </Badge>
+          <UserCell name="Vishnu Singh" />
+        </RightContent>
+      </Nav>
+    </Root>
   );
 };
 
