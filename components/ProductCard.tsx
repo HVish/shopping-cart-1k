@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Product } from '../shared/types';
+import { formatCurrency } from '../shared/utils';
 import { addToCart, removeFromCart } from '../store/cart';
 import { selectIsProductAddedToCart } from '../store/selectors';
 import Button from './Button';
@@ -61,7 +62,7 @@ const ProductCard = ({ className, id, code, image, price, title }: Props) => {
         <Label>Code:</Label> <Code>{code}</Code>
       </div>
       <div>
-        <Label>Price:</Label> <span>₹ {price}</span>
+        <Label>Price:</Label> <span>{formatCurrency(price)}</span>
       </div>
 
       {isProductAddedToCart ? (

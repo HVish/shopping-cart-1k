@@ -4,7 +4,7 @@ import { ChangeEvent, ReactNode } from 'react';
 
 import { prefixedClassNames } from '../styles/utils';
 
-const textFieldClasses = prefixedClassNames('TextField', [
+export const textFieldClasses = prefixedClassNames('TextField', [
   'root',
   'inputField',
   'withIcon',

@@ -20,7 +20,7 @@ interface Props {
   classes?: typeof buttonClasses;
   children: ReactNode;
   /** @default 'primary' */
-  color?: 'primary' | 'success' | 'error';
+  color?: 'primary' | 'success' | 'error' | 'grey';
   /** @default false */
   disabled?: boolean;
   /**
@@ -46,8 +46,9 @@ const Root = styled('button')(({ theme }) => ({
   },
 
   [`&.${buttonClasses.outlined}.${buttonClasses.grey}`]: {
-    border: `1px solid ${theme.palette.grey.main}`,
-    color: theme.palette.text.primary,
+    border: `2px solid ${theme.palette.grey.light}`,
+    color: theme.palette.text.secondary,
+    backgroundColor: theme.palette.background.paper,
 
     [`&:not(.${buttonClasses.disabled}):hover`]: {
       backgroundColor: theme.palette.grey.light,
@@ -55,8 +56,8 @@ const Root = styled('button')(({ theme }) => ({
   },
 
   [`&.${buttonClasses.outlined}.${buttonClasses.primary}`]: {
-    border: `1px solid ${theme.palette.primary.main}`,
-    color: theme.palette.primary.main,
+    border: `1px solid ${theme.palette.primary.light}`,
+    color: theme.palette.primary.light,
 
     [`&:not(.${buttonClasses.disabled}):hover`]: {
       backgroundColor: theme.palette.grey.light,
@@ -93,11 +94,11 @@ const Root = styled('button')(({ theme }) => ({
 
   [`&.${buttonClasses.filled}.${buttonClasses.primary}`]: {
     border: 'none',
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.light,
     color: theme.palette.primary.contrastText,
 
     [`&:not(.${buttonClasses.disabled}):hover`]: {
-      backgroundColor: theme.palette.primary.dark,
+      backgroundColor: theme.palette.primary.main,
     },
   },
 

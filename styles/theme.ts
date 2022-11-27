@@ -5,7 +5,7 @@ const theme = createTheme({
   variables: {
     navHeight: 90,
     footerHeight: 145,
-    mainContentWidth: 1196,
+    mainContentWidth: 1140,
   },
   palette: {
     primary: {

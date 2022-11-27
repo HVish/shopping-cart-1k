@@ -16,9 +16,10 @@ const Root = styled('div')(({ theme }) => ({
 const Main = styled('main')(({ theme }) => ({
   flex: 1,
   overflow: 'auto',
-  width: theme.variables.mainContentWidth,
+  width: '100%',
+  maxWidth: theme.variables.mainContentWidth,
   margin: 'auto',
-  padding: theme.spacing(4, 0),
+  padding: theme.spacing(4),
   paddingTop: theme.variables.navHeight + 16,
 }));
 
