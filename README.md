@@ -1,31 +1,48 @@
-# Emotion Example
+# Shopping cart
 
-Extract and inline critical css with
-[@emotion/css](https://github.com/emotion-js/emotion/tree/master/packages/css),
-[@emotion/server](https://github.com/emotion-js/emotion/tree/master/packages/server),
-[@emotion/react](https://github.com/emotion-js/emotion/tree/master/packages/react),
-and [@emotion/styled](https://github.com/emotion-js/emotion/tree/master/packages/styled).
+This project has been created by `create-next-app` utility.
 
-## Deploy your own
+## Tech stack
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-emotion)
+1. React (v18.2.0)
+2. Nextjs (v13.0.5)
+3. Redux (v4.2.0) - for global state management
+4. Emotion (v11.10.4) - styling engine
+5. Nodejs (v16.15.1)
+6. Yarn (v1.22.18) - node module dependency manager
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-emotion&project-name=with-emotion&repository-name=with-emotion)
+## Running project locally
 
-## How to use
+Go to project root then run following command in terminal:
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-emotion with-emotion-app
+```sh
+yarn install
 ```
 
-```bash
-yarn create next-app --example with-emotion with-emotion-app
+Above command will install all dependencies required to run this project, now run following command to start local development server
+
+```
+yarn dev
 ```
 
-```bash
-pnpm create next-app --example with-emotion with-emotion-app
-```
+After starting the server, visit: http://localhost:3000 in your browser
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+## Demo
+
+1. Product lists
+   ![Product lists](./demo/1-product-list.png 'Product lists')
+
+2. Product lists after adding items to cart
+   ![Product lists](./demo/2-add-to-cart.png 'Product lists')
+
+3. Cart items
+   ![Cart items](./demo/3-cart.png 'Cart items')
+
+4. Shipping address form
+   ![Shipping address form](./demo/4-shipping.png 'Shipping address form')
+
+5. Payment form
+   ![Payment form](./demo/5-payment.png 'Payment form')
+
+6. Success page
+   ![Success page](./demo/6-success.png 'Success page')
