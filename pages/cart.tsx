@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import CartStep from '../components/CartStep';
+import FinishStep from '../components/FinishStep';
 import PaymentStep from '../components/PaymentStep';
 import ShippingStep from '../components/ShippingStep';
 import _Stepper from '../components/Stepper';
@@ -12,7 +13,7 @@ enum Step {
   CART,
   SHIPPING,
   PAYMENT,
-  FINISH,
+  FINISH = 4,
 }
 
 const BackToShopping = styled(Link)(({ theme }) => ({
@@ -45,7 +46,6 @@ const Cart = () => {
       <Stepper
         activeStepIndex={activeStep}
         steps={['Cart', 'Shipping', 'Payment', 'Finish']}
-        onSelect={step => setActiveStep(step)}
       />
       {activeStep === Step.CART && <CartStep onNext={goToShippingStep} />}
       {activeStep === Step.SHIPPING && (
@@ -54,6 +54,7 @@ const Cart = () => {
       {activeStep === Step.PAYMENT && (
         <PaymentStep onNext={goToFinishStep} onBack={goToShippingStep} />
       )}
+      {activeStep === Step.FINISH && <FinishStep />}
     </>
   );
 };

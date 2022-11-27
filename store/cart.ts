@@ -45,6 +45,11 @@ export const cartSlice = createSlice({
     setPaymentInfo(state, action: PayloadAction<PaymentInfo>) {
       state.payment = action.payload;
     },
+    clearCart(state) {
+      state.items = [];
+      state.payment = null;
+      state.shipping = null;
+    },
   },
 });
 
@@ -53,3 +58,4 @@ export const removeFromCart = cartSlice.actions.removeItem;
 
 export const setShippingInfo = cartSlice.actions.setShippingInfo;
 export const setPaymentInfo = cartSlice.actions.setPaymentInfo;
+export const clearCart = cartSlice.actions.clearCart;

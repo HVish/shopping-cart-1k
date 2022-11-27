@@ -52,7 +52,7 @@ const PaymentStep = ({ className, onBack, onNext }: Props) => {
   return (
     <Root className={className}>
       <Title>Payment info</Title>
-      <PaymentInfo>
+      <PaymentInfo ref={paymentInfoRef}>
         <Actions>
           <Button color="grey" variant="outlined" onClick={onBack}>
             Back to shipping
