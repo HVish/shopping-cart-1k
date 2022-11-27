@@ -5,18 +5,17 @@ import { Product } from '../shared/types';
 import { addToCart, removeFromCart } from '../store/cart';
 import { selectIsProductAddedToCart } from '../store/selectors';
 import Button from './Button';
+import Paper from './Paper';
 
-const Root = styled('div')(({ theme }) => ({
+const Root = styled(Paper)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
   overflow: 'hidden',
   gap: theme.spacing(2),
-  backgroundColor: theme.palette.background.paper,
   width: 260,
   height: 420,
   padding: theme.spacing(4),
-  borderRadius: 4,
 }));
 
 const Img = styled('img')(() => ({

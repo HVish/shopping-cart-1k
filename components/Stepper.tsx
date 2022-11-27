@@ -8,6 +8,7 @@ const stepperClasses = prefixedClassNames('Stepper', [
   'root',
   'item',
   'itemActive',
+  'itemClickable',
 ]);
 
 const Root = styled('div', {
@@ -35,32 +36,35 @@ const Root = styled('div', {
     display: 'block',
     width: `${progress}%`,
     height: 4,
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.light,
     transition: 'width 200ms ease-in',
   },
 }));
 
-const Step = styled('div', {
+const Step = styled('button', {
   shouldForwardProp: propName => propName !== 'left',
 })<{ left: number }>(({ theme, left }) => ({
   position: 'absolute',
   top: 0,
   left: `${left}%`,
   transform: 'translateX(-50%)',
-  cursor: 'pointer',
   color: theme.palette.text.secondary,
+  height: '100%',
+  display: 'flex',
+  border: 'none',
+  backgroundColor: 'transparent',
 
   '&::after': {
     content: '""',
     position: 'absolute',
-    top: 24,
+    top: 26,
     left: '50%',
     transform: 'translateX(-50%)',
-    width: 15,
-    height: 15,
+    width: 11,
+    height: 11,
     borderRadius: '50%',
     backgroundColor: theme.palette.grey.dark,
-    transition: 'background-color 100ms ease-in 200ms',
+    transition: 'all 100ms ease-in 200ms',
   },
 
   [`&.${stepperClasses.itemActive}`]: {
@@ -68,15 +72,23 @@ const Step = styled('div', {
     color: theme.palette.text.primary,
 
     '&::after': {
-      backgroundColor: theme.palette.primary.main,
+      top: 24,
+      width: 15,
+      height: 15,
+      backgroundColor: theme.palette.primary.light,
     },
+  },
+
+  [`&.${stepperClasses.itemClickable}`]: {
+    cursor: 'pointer',
   },
 }));
 
 interface Props {
   /**
    * Index of active step in {@link Props.steps steps} array, it should be
-   * a non-negative integer and less than the length of {@link Props.steps steps} array
+   * a non-negative integer and less than or equal to the length of
+   * {@link Props.steps steps} array
    */
   activeStepIndex: number;
   className?: string;
@@ -111,9 +123,11 @@ const Stepper = ({
             key={index}
             className={clsx(
               stepperClasses.item,
+              isActive && stepperClasses.itemActive,
+              onSelect && stepperClasses.itemClickable,
               classes?.item,
-              isActive && classes?.itemActive,
-              isActive && stepperClasses.itemActive
+              isActive ? classes?.itemActive : '',
+              onSelect ? classes?.itemClickable : ''
             )}
             left={getLeftOffset(index)}
             onClick={handleSelect(index)}
