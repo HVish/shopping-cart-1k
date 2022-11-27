@@ -13,10 +13,16 @@ export const selectProducts = (state: RootState) =>
 
 export const selectCartItems = (state: RootState) => state.cart.items;
 
-export const selectCartProducts = (state: RootState) =>
-  state.cart.items
-    .map(item => selectProduct(item.productId)(state))
+export const selectCartProducts = (state: RootState) => {
+  return state.cart.items
+    .map(item => {
+      if (!item) return;
+      const product = selectProduct(item.productId)(state);
+      if (!product) return;
+      return { ...product, count: item.count };
+    })
     .filter(notEmpty);
+};
 
 export const selectIsProductAddedToCart =
   (productId: string) => (state: RootState) =>

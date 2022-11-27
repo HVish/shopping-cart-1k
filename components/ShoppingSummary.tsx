@@ -79,7 +79,7 @@ const ShoppingSummary = ({ className, onNext }: Props) => {
   const products = useSelector(selectCartProducts);
 
   const total = useMemo(
-    () => products.reduce((sum, p) => sum + p.price, 0),
+    () => products.reduce((sum, p) => sum + p.price * p.count, 0),
     [products]
   );
 
@@ -104,7 +104,7 @@ const ShoppingSummary = ({ className, onNext }: Props) => {
         {products.map((product, index) => (
           <Fragment key={product.id}>
             <span>{index === 0 ? 'Subtotal' : ''}</span>
-            <Price>{formatCurrency(product.price)}</Price>
+            <Price>{formatCurrency(product.price * product.count)}</Price>
           </Fragment>
         ))}
         <span>Shipping</span>

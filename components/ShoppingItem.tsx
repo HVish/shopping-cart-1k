@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { useSelector } from 'react-redux';
 
 import { selectProduct } from '../store/selectors';
+import CartItemCount from './CartItemCount';
 
 const Root = styled('div')(({ theme }) => ({
   display: 'grid',
@@ -43,6 +44,7 @@ const ShoppingItem = ({ className, productId, count }: Props) => {
       <Image src={product.image} alt={`${product.title} image`} />
       <Title>{product.title}</Title>
       <Code>Code: {product.code}</Code>
+      <CartItemCount productId={product.id} count={count} />
     </Root>
   );
 };
