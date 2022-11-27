@@ -1,17 +1,18 @@
 import styled from '@emotion/styled';
-import { useRouter } from 'next/router';
 import {
   ChangeEvent,
   Fragment,
   MouseEventHandler,
+  ReactNode,
   useMemo,
   useState,
 } from 'react';
 import { useSelector } from 'react-redux';
 
 import { formatCurrency } from '../shared/utils';
-import { selectCartProducts } from '../store/selectors';
+import { selectCartItems, selectCartProducts } from '../store/selectors';
 import Button from './Button';
+import CartItem from './CartItem';
 import Paper from './Paper';
 import _TextField, { textFieldClasses } from './TextField';
 
@@ -27,6 +28,13 @@ const Title = styled('div')(({ theme }) => ({
   fontSize: 16,
   fontWeight: 'bold',
   color: theme.palette.text.primary,
+}));
+
+const CartItems = styled(Paper)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  borderRadius: 10,
+  gap: theme.spacing(4),
 }));
 
 const TextField = styled(_TextField)(({ theme }) => ({
@@ -70,12 +78,15 @@ const Total = styled('div')(() => ({
 
 interface Props {
   className?: string;
-  onNext: MouseEventHandler;
+  children?: ReactNode;
+  /** @default false */
+  showCartItems?: boolean;
 }
 
-const ShoppingSummary = ({ className, onNext }: Props) => {
-  const router = useRouter();
+const CartSummary = ({ className, children, showCartItems }: Props) => {
   const [promoCode, setPromoCode] = useState('');
+
+  const cartItems = useSelector(selectCartItems);
   const products = useSelector(selectCartProducts);
 
   const total = useMemo(
@@ -87,13 +98,23 @@ const ShoppingSummary = ({ className, onNext }: Props) => {
     setPromoCode(e.target.value);
   };
 
-  const handleBackToShopping = () => {
-    router.push('/');
-  };
-
   return (
     <Root className={className}>
       <Title>Summary</Title>
+      {showCartItems && (
+        <>
+          <Separator />
+          <CartItems>
+            {cartItems.map((item, index) => (
+              <Fragment key={item.productId}>
+                <CartItem {...item} compact />
+                {index + 1 !== cartItems.length && <Separator />}
+              </Fragment>
+            ))}
+          </CartItems>
+          <Separator />
+        </>
+      )}
       <TextField
         placeholder="Promo code"
         value={promoCode}
@@ -115,12 +136,9 @@ const ShoppingSummary = ({ className, onNext }: Props) => {
         <span>TOTAL</span>
         <Price>{formatCurrency(total)}</Price>
       </Total>
-      <Button onClick={onNext}>Checkout</Button>
-      <Button color="grey" variant="outlined" onClick={handleBackToShopping}>
-        Back to shopping
-      </Button>
+      {children}
     </Root>
   );
 };
 
-export default ShoppingSummary;
+export default CartSummary;

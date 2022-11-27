@@ -19,12 +19,25 @@ export interface ShippingInfo {
   phone: string;
   email: string;
   city: string;
-  zipCode: number;
+  zipCode: string;
   address: string;
   country: string;
 }
 
+export enum PaymentMode {
+  CASH = 'cash',
+  CREDIT_CARD = 'credit_card',
+}
+export interface PaymentInfo {
+  mode: PaymentMode;
+  cardNumber: string;
+  name: string;
+  expiry: string;
+  securityCode: string;
+}
+
 export interface CartState {
+  payment: PaymentInfo | null;
   shipping: ShippingInfo | null;
   items: CartItem[];
 }

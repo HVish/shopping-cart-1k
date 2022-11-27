@@ -24,7 +24,11 @@ export const productSlice = createSlice({
 
   initialState,
 
-  reducers: {},
+  reducers: {
+    initProducts(state, action: PayloadAction<Product[]>) {
+      productsAdapter.addMany(state, action.payload);
+    },
+  },
 
   extraReducers: builder => {
     builder.addCase(
@@ -49,3 +53,5 @@ export const productSlice = createSlice({
     );
   },
 });
+
+export const initProducts = productSlice.actions.initProducts;

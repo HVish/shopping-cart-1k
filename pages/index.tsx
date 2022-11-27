@@ -3,8 +3,9 @@ import { useSelector } from 'react-redux';
 
 import ProductCard from '../components/ProductCard';
 import { ReduxWrapper } from '../store';
-import { fetchProducts } from '../store/products';
+import { initProducts } from '../store/products';
 import { selectProducts } from '../store/selectors';
+import { products } from './api/mock-data';
 
 const Root = styled('div')(({ theme }) => ({
   display: 'grid',
@@ -25,16 +26,9 @@ const Products = () => {
   );
 };
 
-export const getServerSideProps = ReduxWrapper.getServerSideProps(
-  store =>
-    async ({ req }) => {
-      const protocol = req.headers['x-forwarded-proto'] || 'http';
-      const origin = req ? `${protocol}://${req.headers.host}` : '';
-      await store.dispatch(fetchProducts(origin));
-      return {
-        props: {},
-      };
-    }
-);
+export const getStaticProps = ReduxWrapper.getStaticProps(store => async () => {
+  store.dispatch(initProducts(products));
+  return { props: {} };
+});
 
 export default Products;

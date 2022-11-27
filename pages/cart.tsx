@@ -2,15 +2,17 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import ShoppingStep from '../components/ShoppingStep';
+import CartStep from '../components/CartStep';
+import PaymentStep from '../components/PaymentStep';
+import ShippingStep from '../components/ShippingStep';
 import _Stepper from '../components/Stepper';
 import ChevronLeftIcon from '../icons/ChevronLeftIcon';
 
 enum Step {
   CART,
-  Shipping,
-  Payment,
-  Finish,
+  SHIPPING,
+  PAYMENT,
+  FINISH,
 }
 
 const BackToShopping = styled(Link)(({ theme }) => ({
@@ -29,7 +31,10 @@ const Stepper = styled(_Stepper)(({ theme }) => ({
 const Cart = () => {
   const [activeStep, setActiveStep] = useState(Step.CART);
 
-  const goToShippingStep = () => setActiveStep(Step.Shipping);
+  const goToCartStep = () => setActiveStep(Step.CART);
+  const goToShippingStep = () => setActiveStep(Step.SHIPPING);
+  const goToPaymentStep = () => setActiveStep(Step.PAYMENT);
+  const goToFinishStep = () => setActiveStep(Step.FINISH);
 
   return (
     <>
@@ -42,7 +47,13 @@ const Cart = () => {
         steps={['Cart', 'Shipping', 'Payment', 'Finish']}
         onSelect={step => setActiveStep(step)}
       />
-      {activeStep === Step.CART && <ShoppingStep onNext={goToShippingStep} />}
+      {activeStep === Step.CART && <CartStep onNext={goToShippingStep} />}
+      {activeStep === Step.SHIPPING && (
+        <ShippingStep onNext={goToPaymentStep} onBack={goToCartStep} />
+      )}
+      {activeStep === Step.PAYMENT && (
+        <PaymentStep onNext={goToFinishStep} onBack={goToShippingStep} />
+      )}
     </>
   );
 };

@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { HYDRATE } from 'next-redux-wrapper';
 
-import { CartState, RootState, ShippingInfo } from '../shared/types';
+import { CartState, PaymentInfo, ShippingInfo } from '../shared/types';
 
 const initialState: CartState = {
+  payment: null,
   shipping: null,
   items: [],
 };
@@ -42,20 +42,14 @@ export const cartSlice = createSlice({
     setShippingInfo(state, action: PayloadAction<ShippingInfo>) {
       state.shipping = action.payload;
     },
-  },
-
-  extraReducers: builder => {
-    builder.addCase(
-      HYDRATE.toString(),
-      (state, action: PayloadAction<RootState>) => {
-        return {
-          ...state,
-          ...action.payload.cart,
-        };
-      }
-    );
+    setPaymentInfo(state, action: PayloadAction<PaymentInfo>) {
+      state.payment = action.payload;
+    },
   },
 });
 
 export const addToCart = cartSlice.actions.addItem;
 export const removeFromCart = cartSlice.actions.removeItem;
+
+export const setShippingInfo = cartSlice.actions.setShippingInfo;
+export const setPaymentInfo = cartSlice.actions.setPaymentInfo;

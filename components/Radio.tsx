@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import clsx from 'clsx';
-import { ReactNode } from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 
 import { prefixedClassNames } from '../styles/utils';
 
@@ -20,11 +20,11 @@ const Root = styled('label')(({ theme }) => ({
   padding: theme.spacing(2),
 
   '&:focus-within': {
-    color: theme.palette.primary.main,
+    color: theme.palette.primary.light,
   },
 
   [`&.${radioClasses.checked}`]: {
-    color: theme.palette.primary.main,
+    color: theme.palette.primary.light,
   },
 
   [`&.${radioClasses.disabled}`]: {
@@ -51,7 +51,7 @@ const Input = styled('input')(({ theme }) => ({
     borderRadius: '50%',
     transform: 'scale(0)',
     transition: '120ms transform ease-in-out',
-    boxShadow: `inset 1em 1em ${theme.palette.primary.main}`,
+    boxShadow: `inset 1em 1em ${theme.palette.primary.light}`,
   },
 
   '&:checked::before': {
@@ -66,6 +66,7 @@ interface Props {
   className?: string;
   /** @default false */
   disabled?: boolean;
+  onClick?: MouseEventHandler;
   onChange?: (isChecked: boolean) => void;
 }
 
@@ -76,6 +77,7 @@ const Radio = ({
   className,
   disabled,
   onChange,
+  onClick,
 }: Props) => {
   const handleChange = () => {
     onChange?.(!checked);
@@ -93,6 +95,7 @@ const Radio = ({
         checked && classes?.checked,
         disabled && classes?.disabled
       )}
+      onClick={onClick}
     >
       <Input
         type="radio"
