@@ -1,5 +1,0 @@
-# TODOs
-
-## Components
-
-- Checkbox
